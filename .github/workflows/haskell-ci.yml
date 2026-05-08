@@ -254,8 +254,9 @@ jobs:
       - name: install doctest
         # Andreas, 2025-07-23: https://github.com/sol/doctest/issues/460
         if: env.HEADHACKAGE != 'true' && matrix.compiler != 'ghc-8.8.4' && matrix.compiler != 'ghc-8.6.5'
+        # Commelina, 2026-05-08: doctest-0.25 failed to run on ghc>=9.4.
         run: |
-          $CABAL v2-install --ignore-project $ARG_COMPILER doctest --ghc-options=-rtsopts --overwrite-policy=always
+          $CABAL v2-install --ignore-project $ARG_COMPILER doctest --ghc-options=-rtsopts --overwrite-policy=always --constraint='doctest<0.25'
       - name: doctests
         # Andreas, 2025-07-23: https://github.com/sol/doctest/issues/460
         if: env.HEADHACKAGE != 'true' && matrix.compiler != 'ghc-8.8.4' && matrix.compiler != 'ghc-8.6.5'
